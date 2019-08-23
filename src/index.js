@@ -19,7 +19,7 @@ const searchStore = () => {
             composeWithDevTools()
         )
     );
-}
+};
 
 const store = searchStore();
 

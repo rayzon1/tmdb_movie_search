@@ -21,3 +21,10 @@ export const searchSuccess = (items, id) => {
         id
     }
 }
+
+export const getPosterUrl = (items) => {
+    return {
+        type: SearchActionTypes.GET_POSTER_URL,
+        items
+    }
+}

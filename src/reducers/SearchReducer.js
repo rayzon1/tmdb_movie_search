@@ -8,7 +8,12 @@ const initialState = {
     isLoading: false,
     hasError: false,
     data: [],
-    movieIds: []
+    movieIds: [],
+    pictures: {
+        url: [],
+        posters: []
+    } 
+
 };
 
 export default function SearchReducer(state=initialState, action) {
@@ -33,8 +38,18 @@ export default function SearchReducer(state=initialState, action) {
                 ...state,
                 data: [action.items],
                 movieIds: action.id.map(res => {
-                    return res.id
+                    return res.id;
                 })
+            }
+        
+        case SearchActionTypes.GET_POSTER_URL:
+            return {
+                ...state,
+                pictures: {
+                    url: action.items.map(res => {
+                        return res.backdrop_path;
+                    }),
+                }
             }
     
         default:
