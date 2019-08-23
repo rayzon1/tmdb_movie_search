@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  padding: 0 55px;
+  border: 1px solid black;
+  justify-content: center;
+}
+
+.item {
+  background: green;
+  flex: 0 0 19.7%;
+  text-align: center;
+  margin: 0 2px;
+  transition: transform 300ms ease 100ms;
+  height: 150px;
+}
+
+.container:hover .item {
+    transform: translateX(-25%);
+ }
+
+ .item:hover ~ .item {
+    transform: translateX(25%);
+ }
+
+ .item:hover {
+    transform: scale(1.5) !important;
+  }
