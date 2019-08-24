@@ -3,6 +3,7 @@ import PosterSlider from "../components/PosterSlider";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import * as SearchActions from "../actions/SearchActions";
+import * as MovieActions from "../actions/MovieActions";
 import authToken from "../config";
 
 export default function Home() {
@@ -33,8 +34,8 @@ export default function Home() {
           })
           .then(res => {
             console.log(res.data.results);
-            dispatch(SearchActions.isLoading(true));
-            dispatch(SearchActions.getPosterUrl(res.data.results));
+            
+            dispatch(MovieActions.getPosterUrl(res.data.results));
             return res;
           })
           .then(res => {

@@ -9,10 +9,10 @@ const initialState = {
     hasError: false,
     data: [],
     movieIds: [],
-    pictures: {
-        url: [],
-        posters: []
-    } 
+    // pictures: {
+    //     url: [],
+    //     posters: []
+    // } 
 
 };
 
@@ -42,15 +42,15 @@ export default function SearchReducer(state=initialState, action) {
                 })
             }
         
-        case SearchActionTypes.GET_POSTER_URL:
-            return {
-                ...state,
-                pictures: {
-                    url: action.items.map(res => {
-                        return res.backdrop_path;
-                    }),
-                }
-            }
+        // case SearchActionTypes.GET_POSTER_URL:
+        //     return {
+        //         ...state,
+        //         pictures: {
+        //             url: action.items.map(res => {
+        //                 return res.backdrop_path;
+        //             }),
+        //         }
+        //     }
     
         default:
             return state;

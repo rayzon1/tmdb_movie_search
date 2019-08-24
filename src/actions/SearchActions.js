@@ -22,9 +22,9 @@ export const searchSuccess = (items, id) => {
     }
 }
 
-export const getPosterUrl = (items) => {
-    return {
-        type: SearchActionTypes.GET_POSTER_URL,
-        items
-    }
-}
+// export const getPosterUrl = (items) => {
+//     return {
+//         type: SearchActionTypes.GET_POSTER_URL,
+//         items
+//     }
+// }
