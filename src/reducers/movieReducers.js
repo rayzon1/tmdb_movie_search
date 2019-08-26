@@ -1,5 +1,9 @@
 import * as MovieActionTypes from '../actiontypes/MovieActionTypes';
 
+
+//! https://image.tmdb.org/t/p/w500
+
+
 const initialState = {
     url: [],
 }
@@ -13,9 +17,11 @@ export default function movieReducer(state = initialState, action) {
             return {
                 ...state,
                 url: action.items.map(res => {
-                        return res.backdrop_path;
+                    return res.backdrop_path;
                 }),
             }
+
+
         default:
             return state;
     }

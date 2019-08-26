@@ -4,8 +4,9 @@ import NavBar from './components/NavBar';
 import Home from './containers/Home';
 import MovieContent from './components/MovieContent';
 
-//! Minimal Viable Product
-//! 
+//! React routes live here?
+
+
 function App() {
   return (
     <div className="App">

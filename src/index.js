@@ -3,26 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import SearchReducer from './reducers/SearchReducer';
-import movieReducer from './reducers/movieReducers';
+import store from './reducers/index';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
-
-const rootReducer = combineReducers({search: SearchReducer, movie: movieReducer});
-
-const searchStore = () => {
-    return createStore(
-        rootReducer,
-        compose(
-            applyMiddleware(thunk),
-            composeWithDevTools()
-        )
-    );
-};
-
-const store = searchStore();
 
 ReactDOM.render(
     <Provider store={store}>
