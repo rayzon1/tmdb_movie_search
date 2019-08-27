@@ -96,7 +96,8 @@
     display: inline-block;
     width: 300px;
     height: 200px;
-    margin-right: 10px;
+    margin-right: 5px;
+    /* margin-left: 20px; */
     font-size: 20px;
     cursor: pointer;
     transition: 450ms all;
@@ -171,7 +172,7 @@
     opacity: 1;
   }
   .tile:hover ~ .tile {
-    -webkit-transform: translate3d(125px, 0, 0);
-            transform: translate3d(125px, 0, 0);
+    -webkit-transform: translate3d(144px, 0, 0);
+            transform: translate3d(144px, 0, 0);
   }
   
