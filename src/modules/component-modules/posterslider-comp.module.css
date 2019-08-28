@@ -89,6 +89,7 @@
     white-space: nowrap;
     margin: 64px 0;
     padding-bottom: 10px;
+    /* overflow: auto; */
   }
   .tile {
     position: relative;

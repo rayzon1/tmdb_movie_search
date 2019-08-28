@@ -5,7 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(20, 20, 20);
+  /* background-color: rgb(20, 20, 20); */
+  background-image: url('./images/blue-linear-gradient-black-1920x1080-c2-00bfff-000000-a-345-f-14.jpg');
 }
 
 code {
