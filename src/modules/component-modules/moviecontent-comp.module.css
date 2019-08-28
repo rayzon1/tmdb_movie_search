@@ -1,5 +1,5 @@
 .content {
-    margin-top: 40px;
+    /* margin-top: 40px; */
     height: 775px;
     position: relative;
   }
@@ -10,7 +10,7 @@
   }
   
   .left {
-    background: black;
+    /* background: black; */
     width: 30%;
     position: relative;
   }
@@ -18,7 +18,7 @@
   .left:before {
     content: '';
     position: absolute;
-    background-image: linear-gradient(to right,#000,transparent);
+    /* background-image: linear-gradient(to right,#000,transparent); */
     top: 0;
     bottom: 0;
     left: 100%;
@@ -28,7 +28,7 @@
   
   .right {
     /* background: green; */
-    background: rgba(0,128,0,.8);
+    /* background: rgba(0,128,0,.8); */
     width: 70%;
   }
   
@@ -39,7 +39,7 @@
     left: 38%;
     right: 0;
     bottom: 0;
-    padding: 30px
+    /* padding: 30px */
   }
 
   .posterImage {
