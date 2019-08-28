@@ -1,6 +1,6 @@
 .content {
     margin-top: 40px;
-    height: 300px;
+    height: 775px;
     position: relative;
   }
   
@@ -23,19 +23,32 @@
     bottom: 0;
     left: 100%;
     width: 275px;
+    height: auto;
   }
   
   .right {
-    background: green;
+    /* background: green; */
+    background: rgba(0,128,0,.8);
     width: 70%;
   }
   
   .contentContainer {
     color: white;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 2%;
+    left: 38%;
     right: 0;
     bottom: 0;
     padding: 30px
   }
+
+  .posterImage {
+    width: 458px;
+    height: 687px;
+    border-radius: 5px;
+    /* box-shadow: 0 45px 100px rgba(0, 0, 0, 0.4); */
+    box-shadow: 26px 23px 64px rgba(0, 0, 0, 1);
+    transform: skewY(1deg);
+  }
+
+  

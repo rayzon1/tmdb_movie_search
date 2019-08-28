@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PosterSlider from "../components/PosterSlider";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import * as SearchActions from "../actions/SearchActions";
 import * as MovieActions from "../actions/MovieActions";
-import MovieContent from '../components/MovieContent';
+import MovieContent from "../components/MovieContent";
 import authToken from "../config";
 
 export default function Home() {
@@ -12,9 +12,10 @@ export default function Home() {
   const searchByMovie = `https://api.themoviedb.org/3/movie/popular?api_key=${authToken}&language=en-US&page=1`;
   const path = useSelector(state => state.movie.url);
   const movieData = useSelector(state => state.search.data["0"]);
-  
-  //! full poster path https://api.themoviedb.org/3/movie/537056/images?api_key=6d1e723cd6edce1af3e8bf19b4ce51db&language=en-US&include_image_language=en
-
+  const [posterContentStatus, getPosterContentStatus] = useState({
+    clicked: false,
+    index: 0
+  });
 
   //! Google search for "Minimal Viable Product"
   //! ** Make deadline: 10-15 days?
@@ -25,21 +26,19 @@ export default function Home() {
   //!         B. - SPLASH SCREEN / MAIN POSTER - POPULAR MOVIES SCROLL ACROSS EVERY COUPLE OF SECONDS.
   //!             * CONTENT / TOP SCROLL * NETFLIX MOVIE RIGHT BELOW NAVBAR.
 
-
-  
   const fetchData = url => {
     return dispatch => {
-        dispatch(SearchActions.isLoading(true));
-        axios(url)
-          .then(res => {
-            dispatch(SearchActions.searchSuccess(res.data, res.data.results));
-            dispatch(MovieActions.getPosterUrl(res.data.results));
-            dispatch(SearchActions.isLoading(false));
-          })
-          .catch(err => {
-            dispatch(SearchActions.searchError(true));
-            console.error(err);
-          });
+      dispatch(SearchActions.isLoading(true));
+      axios(url)
+        .then(res => {
+          dispatch(SearchActions.searchSuccess(res.data, res.data.results));
+          dispatch(MovieActions.getPosterUrl(res.data.results));
+          dispatch(SearchActions.isLoading(false));
+        })
+        .catch(err => {
+          dispatch(SearchActions.searchError(true));
+          console.error(err);
+        });
     };
   };
 
@@ -47,12 +46,17 @@ export default function Home() {
     dispatch(fetchData(searchByMovie));
   }, [searchByMovie]);
 
-  
-
   return (
     <>
-      <PosterSlider movieData={path.length > 2 && movieData}/>
-      <MovieContent />
+      <PosterSlider
+        movieData={path.length > 2 && movieData}
+        getPosterContentStatus={getPosterContentStatus}
+      />
+      <MovieContent 
+        movieData={path.length > 2 && movieData} 
+        getPosterContentStatus={getPosterContentStatus}
+        posterContentStatus={posterContentStatus}
+      />
     </>
   );
 }
