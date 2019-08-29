@@ -4,14 +4,26 @@ import styles from "../modules/component-modules/moviecontent-comp.module.css";
 export default function MovieContent({
   movieData,
   posterContentStatus,
-  getPosterContentStatus
+  getPosterContentStatus,
+  movieIds
 }) {
   const posterIndex = posterContentStatus.index;
-
+  
   return (
     <div className={styles.content}>
       <div className={styles.background}>
-        <div className={styles.left}><span style={{color: 'white'}}>{movieData && movieData.results[posterIndex].overview}</span></div>
+        <div className={styles.left}>
+          <span
+            style={{
+              color: "white",
+              margin: "20px",
+              fontSize: "28px",
+              textShadow: "2px 2px 4px #000000"
+            }}
+          >
+            {movieData && movieData.results[posterIndex].overview}
+          </span>
+        </div>
         <div className={styles.right} />
       </div>
       {movieData && (

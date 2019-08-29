@@ -17,7 +17,7 @@ export default function PosterSlider({ movieData, getPosterContentStatus }) {
             <img
               className={styles.tile__image}
               src={`https://image.tmdb.org/t/p/w300${data.backdrop_path}`}
-              alt="image-tiles"
+              alt="tiles"
             />
           </div>
           <div className={styles.tile__details}>

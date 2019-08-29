@@ -6,6 +6,7 @@ import * as MovieActionTypes from '../actiontypes/MovieActionTypes';
 
 const initialState = {
     url: [],
+    movieDetails: []
 }
 
 /**
@@ -20,7 +21,12 @@ export default function movieReducer(state = initialState, action) {
                     return res.backdrop_path;
                 }),
             }
-
+        
+        case MovieActionTypes.GET_MOVIE_DETAILS:
+            return {
+                ...state,
+                movieDetails: [action.items]
+            }
 
         default:
             return state;

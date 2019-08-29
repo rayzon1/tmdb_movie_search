@@ -6,3 +6,10 @@ export const getPosterUrl = items => {
     items
   };
 };
+
+export const getMovieDetails = items => {
+  return {
+    type: MovieActionTypes.GET_MOVIE_DETAILS,
+    items
+  }
+}
