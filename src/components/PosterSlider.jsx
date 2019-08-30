@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "../modules/component-modules/posterslider-comp.module.css";
+import PropTypes from "prop-types";
 
 export default function PosterSlider({ movieData, getPosterContentStatus }) {
   //! Map urls and combine to path to gather poster backdrops.
   //! https://image.tmdb.org/t/p/w500
-
 
   /**
    * Mapped image tiles showing popular movies in scrollbar.
@@ -36,4 +36,10 @@ export default function PosterSlider({ movieData, getPosterContentStatus }) {
       </div>
     </div>
   );
+}
+
+PosterSlider.propTypes = {
+  movieData: PropTypes.array.isRequired,
+  getPosterContentStatus: PropTypes.func.isRequired
+
 }

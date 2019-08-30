@@ -18,3 +18,14 @@
 }
 
 
+@media only screen and (max-width: 374) {
+
+  .App {
+    background-color: blue;
+  }
+
+
+
+
+
+}

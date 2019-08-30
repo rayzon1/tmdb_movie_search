@@ -15,3 +15,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+@media (max-width: 374) {
+
+  body {
+    background-image: none;
+    background-color: blue;
+    background-size: 10000px;
+  }
+
+
+
+
+
+}
