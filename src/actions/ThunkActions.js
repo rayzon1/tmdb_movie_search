@@ -2,6 +2,9 @@ import axios from "axios";
 import * as SearchActions from "./SearchActions";
 import * as MovieActions from "./MovieActions";
 
+/**
+ * THUNK ACTION TO GET THE IMDB_IDS FROM THE 
+ */
 export const fetchMovieDetails = url => {
   return dispatch => {
     axios
@@ -10,6 +13,7 @@ export const fetchMovieDetails = url => {
         dispatch(SearchActions.isLoading(true));
         let temp = data.map(res => res.data);
         dispatch(MovieActions.getMovieDetails(temp));
+        dispatch(MovieActions.getImdbIds(temp));
         dispatch(SearchActions.isLoading(false));
       })
       .catch(err => {

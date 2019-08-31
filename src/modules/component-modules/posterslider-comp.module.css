@@ -28,7 +28,6 @@
     width: 300px;
     height: 200px;
     margin-right: 5px;
-    /* margin-left: 20px; */
     font-size: 20px;
     cursor: pointer;
     transition: 450ms all;
@@ -107,10 +106,9 @@
             transform: translate3d(144px, 0, 0);
   }
   
-  @media(max-width: 375px) {
+  @media only screen and (max-width: 1300px) {
 
-    .tile__img {
-      width: 200px;
-      
-    }
+
+
+
   }

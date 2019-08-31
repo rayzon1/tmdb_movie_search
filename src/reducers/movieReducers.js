@@ -6,7 +6,8 @@ import * as MovieActionTypes from '../actiontypes/MovieActionTypes';
 
 const initialState = {
     url: [],
-    movieDetails: []
+    movieDetails: [],
+    imdbIds: []
 }
 
 /**
@@ -26,6 +27,14 @@ export default function movieReducer(state = initialState, action) {
             return {
                 ...state,
                 movieDetails: [action.items]
+            }
+
+        case MovieActionTypes.GET_IMDB_IDS:
+            return {
+                ...state,
+                imdbIds: action.items.map(res => {
+                    return res.imdb_id;
+                }),
             }
 
         default:

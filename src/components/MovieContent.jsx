@@ -12,23 +12,18 @@ export default function MovieContent({
 
   return (
     <div className={styles.content}>
-      <div className={styles.background}>
-        <div className={styles.left}>
-          <div className={styles.summary}>
-            <div>{movieData && movieData.results[posterIndex].overview}</div>
-            <br/>
-            <div className={styles.productionLogoContainer}>
-              {
-                movieDetails.length > 1 && 
-                movieDetails[posterIndex].production_companies.map(data => (
-                    data.logo_path !== null &&
-                    <img src={`https://image.tmdb.org/t/p/w500${data.logo_path}`} className={styles.productionLogo} />
-                ))
-              }
-            </div>
-          </div>
+      <div className={styles.summary}>
+        <div className={styles.contentContainer}>{movieData && movieData.results[posterIndex].overview}</div>
+        <br/>
+        <div className={styles.productionLogoContainer}>
+          {
+            movieDetails.length > 1 && 
+            movieDetails[posterIndex].production_companies.map(data => (
+                data.logo_path !== null &&
+                <img src={`https://image.tmdb.org/t/p/w500${data.logo_path}`} className={styles.productionLogo} />
+            ))
+          }
         </div>
-        <div className={styles.right} />
       </div>
       {movieData && (
         <div className={styles.contentContainer}>
@@ -46,7 +41,7 @@ export default function MovieContent({
 }
 
 MovieContent.propTypes = {
-  movieData: PropTypes.array.isRequired,
+  movieData: PropTypes.object.isRequired,
   posterContentStatus: PropTypes.object.isRequired,
-  movieDetails: PropTypes.array.isRequired
+  movieDetails: PropTypes.object.isRequired
 }

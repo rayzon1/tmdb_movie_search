@@ -7,7 +7,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* background-color: rgb(20, 20, 20); */
   background-image: url('./images/wallpaper_black-grey-gradient-linear-3200x1800-c2-000000-808080-a-135-f-14.jpg');
-  background-size: 2200px;
+  background-size: 100;
+  background-position: 50%;
   background-repeat: no-repeat;
 }
 
@@ -16,7 +17,7 @@ code {
     monospace;
 }
 
-@media (max-width: 374) {
+@media (max-width: 1300) {
 
   body {
     background-image: none;

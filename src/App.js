@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
 
-  const searchByMovie = `https://api.themoviedb.org/3/movie/popular?api_key=${authToken}&language=en-US&page=1`;
+  const searchByMovie = `https://api.themoviedb.org/3/movie/top_rated?api_key=${authToken}&language=en-US&page=1`;
   const movieIds = useSelector(state => state.search.movieIds);
   const dispatch = useDispatch();
 

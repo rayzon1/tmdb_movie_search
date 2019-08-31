@@ -6,6 +6,10 @@ import { apiKey } from "../config";
 
 const omdb = `http://www.omdbapi.com/?apikey=${apiKey}&i=tt2837574`;
 
+const videos = 'https://www.youtube.com/watch?v=' // + KEY
+
+const getVideoKeys = 'https://api.themoviedb.org/3/movie/423204/videos?api_key=6d1e723cd6edce1af3e8bf19b4ce51db&language=en-US';
+
 export default function Home() {
   const path = useSelector(state => state.movie.url);
   const movieData = useSelector(state => state.search.data["0"]);
