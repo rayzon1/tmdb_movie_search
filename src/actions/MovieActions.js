@@ -20,3 +20,10 @@ export const getImdbIds = items => {
     items
   }
 }
+
+export const getImdbInformation = items => {
+  return {
+    type: MovieActionTypes.GET_IMDB_INFORMATION,
+    items
+  }
+}

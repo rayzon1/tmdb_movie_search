@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import PosterSlider from "../components/PosterSlider";
 import { useSelector } from "react-redux";
 import MovieContent from "../components/MovieContent";
-import { apiKey } from "../config";
+// import { apiKey } from "../config";
 
-const omdb = `http://www.omdbapi.com/?apikey=${apiKey}&i=tt2837574`;
+// const omdb = `http://www.omdbapi.com/?apikey=${apiKey}&i=tt2837574`;
 
 const videos = 'https://www.youtube.com/watch?v=' // + KEY
 
+// Need to use movieIds to find video key to add to
 const getVideoKeys = 'https://api.themoviedb.org/3/movie/423204/videos?api_key=6d1e723cd6edce1af3e8bf19b4ce51db&language=en-US';
 
 export default function Home() {
-  const path = useSelector(state => state.movie.url);
+  // const path = useSelector(state => state.movie.url);
   const movieData = useSelector(state => state.search.data["0"]);
   const movieDetails = useSelector(state => state.movie.movieDetails["0"]);
+  // const imdbIds = useSelector(state => state.movie.imdbIds);
+ 
   const [posterContentStatus, getPosterContentStatus] = useState({
     clicked: false,
     index: 0
@@ -31,13 +34,13 @@ export default function Home() {
   return (
     <>
       <PosterSlider
-        movieData={path.length > 2 && movieData}
+        movieData={movieData}
         getPosterContentStatus={getPosterContentStatus}
       />
       <MovieContent 
-        movieData={path.length > 2 && movieData} 
+        movieData={movieData} 
         posterContentStatus={posterContentStatus}
-        movieDetails={movieDetails !== undefined && movieDetails}
+        movieDetails={movieDetails}
       />
     </>
   );

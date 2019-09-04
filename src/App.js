@@ -3,8 +3,8 @@ import './App.css';
 import NavBar from './components/NavBar';
 import Home from './containers/Home';
 import { HashRouter, Route, Switch } from "react-router-dom";
-import { fetchData, fetchMovieDetails } from "./actions/ThunkActions";
-import { authToken } from "./config";
+import { fetchData, fetchMovieDetails, fetchImdbInformation } from "./actions/ThunkActions";
+import { authToken, apiKey } from "./config";
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,6 +13,7 @@ function App() {
 
   const searchByMovie = `https://api.themoviedb.org/3/movie/top_rated?api_key=${authToken}&language=en-US&page=1`;
   const movieIds = useSelector(state => state.search.movieIds);
+  const imdbIds = useSelector(state => state.movie.imdbIds);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,6 +29,15 @@ function App() {
       })
     ));
   }, [movieIds])
+
+  useEffect(() => {
+    imdbIds.length > 1 &&
+    dispatch(fetchImdbInformation(
+      imdbIds.map(data => {
+        return axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&i=${data}`);
+      })
+    ));
+  }, [imdbIds])
 
   return (
     <HashRouter>

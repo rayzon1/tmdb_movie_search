@@ -6,10 +6,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* background-color: rgb(20, 20, 20); */
-  background-image: url('./images/wallpaper_black-grey-gradient-linear-3200x1800-c2-000000-808080-a-135-f-14.jpg');
-  background-size: 100;
-  background-position: 50%;
-  background-repeat: no-repeat;
+  background: url('./images/wallpaper_black-grey-gradient-linear-3200x1800-c2-000000-808080-a-135-f-14.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /* background-position: 50%; */
 }
 
 code {
@@ -17,7 +19,7 @@ code {
     monospace;
 }
 
-@media (max-width: 1300) {
+/* @media (max-width: 1300) {
 
   body {
     background-image: none;
@@ -29,4 +31,4 @@ code {
 
 
 
-}
+} */
