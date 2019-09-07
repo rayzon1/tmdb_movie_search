@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import PosterSlider from "../components/PosterSlider";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import MovieContent from "../components/MovieContent";
-// import { apiKey } from "../config";
+import * as PosterClickActions from "../actions/PosterClickActions";
 
 // const omdb = `http://www.omdbapi.com/?apikey=${apiKey}&i=tt2837574`;
 
@@ -12,15 +12,28 @@ const videos = 'https://www.youtube.com/watch?v=' // + KEY
 const getVideoKeys = 'https://api.themoviedb.org/3/movie/423204/videos?api_key=6d1e723cd6edce1af3e8bf19b4ce51db&language=en-US';
 
 export default function Home() {
-  // const path = useSelector(state => state.movie.url);
-  const movieData = useSelector(state => state.search.data["0"]);
-  const movieDetails = useSelector(state => state.movie.movieDetails["0"]);
-  // const imdbIds = useSelector(state => state.movie.imdbIds);
+  const topRatedData = useSelector(state => state.search.data.topRated["0"]);
+  const popularData = useSelector(state => state.search.data.popular["0"]);
+
+  const topRatedDetails = useSelector(state => state.movie.details.topRatedDetails["0"]);
+  const popularDetails = useSelector(state => state.movie.details.popularDetails["0"]);
+
+  const topRatedImdbInformation = useSelector(state => state.movie.imdbInformation.topRatedImdb["0"]);
+  const popularImdbInformation = useSelector(state => state.movie.imdbInformation.popularImdb["0"]);
+
+  const clickPosterState = useSelector(state => state.posterClickState.clickState)
  
-  const [posterContentStatus, getPosterContentStatus] = useState({
-    clicked: false,
-    index: 0
-  });
+  const dispatch = useDispatch();
+
+  const dispatchTopRated = i => {
+    return dispatch(PosterClickActions.topRatedClick(i));
+  }
+
+  const dispatchPopular = i => {
+    return dispatch(PosterClickActions.popularClick(i));
+  }
+
+  //Show visibility state (true/false) depending on poster click. Click will show or hide movie content.
 
   //! Google search for "Minimal Viable Product"
   //! ** Make deadline: 10-15 days?
@@ -33,14 +46,31 @@ export default function Home() {
 
   return (
     <>
+      <div style={{ color: "white", textAlign: "left", fontSize: "24px" }}>
+          Top Rated
+      </div>
       <PosterSlider
-        movieData={movieData}
-        getPosterContentStatus={getPosterContentStatus}
+        data={topRatedData}
+        getPosterStatus={dispatchTopRated}
       />
       <MovieContent 
-        movieData={movieData} 
-        posterContentStatus={posterContentStatus}
-        movieDetails={movieDetails}
+        data={topRatedData} 
+        posterStatus={clickPosterState.topRated}
+        details={topRatedDetails}
+        imdbInformation={topRatedImdbInformation}
+      />
+      <div style={{ color: "white", textAlign: "left", fontSize: "24px" }}>
+          Popular
+      </div>
+      <PosterSlider
+        data={popularData}
+        getPosterStatus={dispatchPopular}
+      />
+      <MovieContent 
+        data={popularData} 
+        posterStatus={clickPosterState.popular}
+        details={popularDetails}
+        imdbInformation={popularImdbInformation}
       />
     </>
   );

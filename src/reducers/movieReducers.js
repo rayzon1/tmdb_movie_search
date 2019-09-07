@@ -5,10 +5,22 @@ import * as MovieActionTypes from '../actiontypes/MovieActionTypes';
 
 
 const initialState = {
-    url: [],
-    movieDetails: [],
-    imdbIds: [],
-    imdbInformation: []
+    url: {
+        topRated: [],
+        popular: [],
+    },
+    details: {
+        topRatedDetails: [],
+        popularDetails: []
+    },
+    imdbIds: {
+        topRatedIds: [],
+        popularIds: []
+    },
+    imdbInformation: {
+        topRatedImdb: [],
+        popularImdb: []
+    }
 }
 
 /**
@@ -19,29 +31,47 @@ export default function movieReducer(state = initialState, action) {
         case MovieActionTypes.GET_POSTER_URL:
             return {
                 ...state,
-                url: action.items.map(res => {
-                    return res.backdrop_path;
-                }),
+                url: {
+                    topRated: action.items1.map(res => {
+                        return res.backdrop_path;
+                    }),
+                    popular: action.items2.map(res => {
+                        return res.backdrop_path;
+                    })
+                }
             }
-        
+      
         case MovieActionTypes.GET_MOVIE_DETAILS:
             return {
                 ...state,
-                movieDetails: [action.items]
+                details: {
+                    topRatedDetails: action.arr1 ? [action.arr1] : [...state.details.topRatedDetails],
+                    popularDetails: action.arr2 ? [action.arr2] : [...state.details.popularDetails]
+                }
             }
 
         case MovieActionTypes.GET_IMDB_IDS:
             return {
                 ...state,
-                imdbIds: action.items.map(res => {
-                    return res.imdb_id;
-                }),
+                imdbIds: {
+                    topRatedIds: action.items1 ? action.items1.map(res => {
+                        return res.imdb_id;
+                    }) : [...state.imdbIds.topRatedIds],
+                    popularIds: action.items2 ? action.items2.map(res => {
+                        return res.imdb_id;
+                    }) : [...state.imdbIds.popularIds],
+                }
+                
+                
             }
         
         case MovieActionTypes.GET_IMDB_INFORMATION:
             return {
                 ...state,
-                imdbInformation: [action.items]
+                imdbInformation: {
+                    topRatedImdb: action.items1 ? [action.items1] : [...state.imdbInformation.topRatedImdb],
+                    popularImdb: action.items2 ? [action.items2] : [...state.imdbInformation.popularImdb]
+                }
             }
 
         default:

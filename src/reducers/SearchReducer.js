@@ -7,8 +7,14 @@ import * as SearchActionTypes from '../actiontypes/SearchActionTypes';
 const initialState = {
     isLoading: false,
     hasError: false,
-    data: [],
-    movieIds: [],
+    data: {
+        topRated: [],
+        popular: [],
+    },
+    movieIds: {
+        topRated: [],
+        popular: []
+    },
 
 };
 
@@ -29,13 +35,27 @@ export default function SearchReducer(state=initialState, action) {
                 ...state
             }
 
-        case SearchActionTypes.SEARCH_SUCCESS:
+        case SearchActionTypes.MOVIE_IDS:
             return {
                 ...state,
-                data: [action.items],
-                movieIds: action.id.map(res => {
-                    return res.id;
-                })
+                movieIds: {
+                    topRated: action.id1.map(res => {
+                        return res.id;
+                    }),
+                    popular: action.id2.map(res => {
+                        return res.id;
+                    })
+                }
+                
+            }
+
+        case SearchActionTypes.CATEGORY_DATA:
+            return {
+                ...state,
+                data: {
+                    topRated: [action.data1],
+                    popular: [action.data2]    
+                },
             }
         
     

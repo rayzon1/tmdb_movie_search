@@ -14,11 +14,19 @@ export const searchError = bool => {
     }
 }
 
-export const searchSuccess = (items, id) => {
+export const getMovieIds = (id1, id2) => {
     return {
-        type: SearchActionTypes.SEARCH_SUCCESS,
-        items,
-        id
+        type: SearchActionTypes.MOVIE_IDS,
+        id1,
+        id2
+    }
+}
+
+export const getCategoryData = (data1, data2) => {
+    return {
+        type: SearchActionTypes.CATEGORY_DATA,
+        data1,
+        data2
     }
 }
 

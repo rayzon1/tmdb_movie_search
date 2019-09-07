@@ -2,7 +2,10 @@ import React from "react";
 import styles from "../modules/component-modules/posterslider-comp.module.css";
 import PropTypes from "prop-types";
 
-export default function PosterSlider({ movieData, getPosterContentStatus }) {
+export default function PosterSlider({
+  data,
+  getPosterStatus,
+}) {
   //! Map urls and combine to path to gather poster backdrops.
   //! https://image.tmdb.org/t/p/w500
 
@@ -10,9 +13,14 @@ export default function PosterSlider({ movieData, getPosterContentStatus }) {
    * Mapped image tiles showing popular movies in scrollbar.
    */
   const imageTiles = () => {
-    return movieData &&
-      movieData.results.map((data, index) => (
-        <div className={styles.tile} key={index} onClick={() => getPosterContentStatus({ clicked: true, index: index })}>
+    return (
+      data &&
+      data.results.map((data, index) => (
+        <div
+          className={styles.tile}
+          key={index}
+          onClick={() => getPosterStatus(index)}
+        >
           <div className={styles.tile__media}>
             <img
               className={styles.tile__image}
@@ -24,22 +32,22 @@ export default function PosterSlider({ movieData, getPosterContentStatus }) {
             <div className={styles.tile__title}>{data.original_title}</div>
           </div>
         </div>
-      ));
+      ))
+    );
   };
 
   return (
-    <div className={styles.contain}>
-      <div className={styles.row}>
-        <div className={styles.row__inner}>
-          {imageTiles()}
+    <>
+      <div className={styles.contain}>
+        <div className={styles.row}>
+          <div className={styles.row__inner}>{imageTiles()}</div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
 PosterSlider.propTypes = {
-  movieData: PropTypes.array.isRequired,
-  getPosterContentStatus: PropTypes.func.isRequired
-
-}
+  data: PropTypes.array.isRequired,
+  getPosterStatus: PropTypes.func.isRequired
+};

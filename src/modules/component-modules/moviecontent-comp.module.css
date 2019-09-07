@@ -6,6 +6,10 @@
   margin-left: 8%;
 }
 
+.hideContent {
+  display: none;
+}
+
 .summary {
   color: white;    
   font-size: 28px;
@@ -17,7 +21,7 @@
 
 .contentContainer {
   width: 100%;
-  
+  text-align: justify;
 }
 
 .posterImage {
@@ -34,13 +38,19 @@
 
 .productionLogo {
   width: 8%; 
-  margin-left: 40px;
+  margin-left: 20px;
   margin-bottom: 40px;
 }
 
+.reviewLogoContainer {
+  text-align: left;
+  margin-top: 2%;
+}
+
+
 .productionLogoContainer {
   text-align: left;
-  margin-top: 20%;
+  margin-top: 8%;
 }
 
 @media only screen and (max-width: 1300px) {
@@ -61,7 +71,7 @@
   }
 
   .productionLogo {
-    order: 5;
+    display: none;
   }
 
   .productionLogoContainer {
