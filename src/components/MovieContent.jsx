@@ -12,8 +12,10 @@ export default function MovieContent({
   imdbInformation,
 }) {
 
+  // Poster index from Redux state
   const posterIndex = posterStatus.index;
 
+  // Logo icons.
   const reviewLogos = {
     imdb_logo,
     metacritic,

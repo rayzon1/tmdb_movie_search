@@ -69,8 +69,8 @@ export default function movieReducer(state = initialState, action) {
             return {
                 ...state,
                 imdbInformation: {
-                    topRatedImdb: action.items1 ? [action.items1] : [...state.imdbInformation.topRatedImdb],
-                    popularImdb: action.items2 ? [action.items2] : [...state.imdbInformation.popularImdb]
+                    topRatedImdb: action.category === 'topRated' ? [action.items] : [...state.imdbInformation.topRatedImdb],
+                    popularImdb: action.category === 'popular' ? [action.items] : [...state.imdbInformation.popularImdb]
                 }
             }
 

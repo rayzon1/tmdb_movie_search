@@ -12,12 +12,12 @@ export const fetchImdbInformation = (url1, url2) => {
       .all(url1)
       .then(data => {        
         let temp = data.map(res => res.data);
-        dispatch(MovieActions.getImdbInformation(temp, false));      
+        dispatch(MovieActions.getImdbInformation(temp, 'topRated'));      
       })
       axios.all(url2)
       .then(data => {        
         let temp = data.map(res => res.data);
-        dispatch(MovieActions.getImdbInformation(false, temp));      
+        dispatch(MovieActions.getImdbInformation(temp, 'popular'));      
       })
       .catch(err => {
         dispatch(SearchActions.searchError(true));
@@ -64,10 +64,7 @@ export const fetchData = url => {
       .then(axios.spread((top, pop) => {
         dispatch(SearchActions.getCategoryData(top.data, pop.data));
         dispatch(SearchActions.getMovieIds(top.data.results, pop.data.results));
-      
         dispatch(MovieActions.getPosterUrl(top.data.results, pop.data.results));
-
-
         dispatch(SearchActions.isLoading(false));
       }))
       .catch(err => {

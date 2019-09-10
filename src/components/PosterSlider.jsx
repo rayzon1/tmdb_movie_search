@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 export default function PosterSlider({
   data,
   getPosterStatus,
+  category
 }) {
   //! Map urls and combine to path to gather poster backdrops.
   //! https://image.tmdb.org/t/p/w500
@@ -19,7 +20,9 @@ export default function PosterSlider({
         <div
           className={styles.tile}
           key={index}
-          onClick={() => getPosterStatus(index)}
+          onClick={() => {
+             getPosterStatus(index, category);
+            }}
         >
           <div className={styles.tile__media}>
             <img

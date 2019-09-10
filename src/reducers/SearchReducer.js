@@ -45,8 +45,7 @@ export default function SearchReducer(state=initialState, action) {
                     popular: action.id2.map(res => {
                         return res.id;
                     })
-                }
-                
+                }   
             }
 
         case SearchActionTypes.CATEGORY_DATA:

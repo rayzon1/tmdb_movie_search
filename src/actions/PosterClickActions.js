@@ -4,16 +4,17 @@ import * as PosterClickActionTypes from "../actiontypes/PosterClickActionTypes";
 // actions will update the specific state for index and click.
 // parameter = index
 
-export const topRatedClick = index => {
+export const changeClickState = (index, item) => {
     return {
-        type: PosterClickActionTypes.TOP_RATED_CLICK,
-        index
+        type: PosterClickActionTypes.CHANGE_CLICK_STATE,
+        index,
+        item
     }
 }
 
-export const popularClick = index => {
+export const setClickedFalse = item => {
     return {
-        type: PosterClickActionTypes.POPULAR_CLICK,
-        index
+        type: PosterClickActionTypes.CHANGE_FALSE_CLICK_STATE,
+        item
     }
 }
