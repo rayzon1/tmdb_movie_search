@@ -27,6 +27,12 @@ const initialState = {
     }
 }
 
+const backdropUrls = arr =>{
+    return arr.map(res => {
+        return res.backdrop_path;
+    })
+}
+
 /**
  *  this will be the main movie state for gathering urls, images, anything it needs.
  */
@@ -36,15 +42,9 @@ export default function movieReducer(state = initialState, action) {
             return {
                 ...state,
                 url: {
-                    topRated: action.items1.map(res => {
-                        return res.backdrop_path;
-                    }),
-                    popular: action.items2.map(res => {
-                        return res.backdrop_path;
-                    }),
-                    upcoming: action.items3.map(res => {
-                        return res.backdrop_path;
-                    })
+                    topRated: backdropUrls(action.items1),
+                    popular: backdropUrls(action.items2),
+                    upcoming: backdropUrls(action.items3)
                 }
             }
       

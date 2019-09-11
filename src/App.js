@@ -15,6 +15,28 @@ function App() {
 
   const dispatch = useDispatch();
 
+  const sendUrls = (arr, urls) => {
+    return arr.map(data => {
+      return createUrls(data, urls);
+    })
+  }
+
+  const movieIdArray = arr =>{
+    return [
+      arr.topRated,
+      arr.popular,
+      arr.upcoming
+    ]
+  } 
+
+  const imdbIdArray = arr => {
+    return [
+      arr.topRatedIds,
+      arr.popularIds,
+      arr.upcomingIds
+    ]
+  }
+
   /**
    * FRONT-LOADS data and movie urls
    */
@@ -29,9 +51,10 @@ function App() {
     movieIds.popular.length > 1 &&
     movieIds.upcoming.length > 1 &&
     dispatch(fetchMovieDetails(
-      createUrls(movieIds.topRated, movieUrls),
-      createUrls(movieIds.popular, movieUrls),
-      createUrls(movieIds.upcoming, movieUrls),
+      // createUrls(movieIds.topRated, movieUrls),
+      // createUrls(movieIds.popular, movieUrls),
+      // createUrls(movieIds.upcoming, movieUrls),
+      sendUrls(movieIdArray(movieIds), movieUrls)
     ));
   }, [movieIds.upcoming, dispatch])
 
