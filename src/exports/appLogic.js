@@ -16,7 +16,8 @@ export const imdbUrls = data => {
 
 export const categories = [
     'top_rated',
-    'popular'
+    'popular',
+    'upcoming'
 ]
 
 export const createUrls = (items, func) => {

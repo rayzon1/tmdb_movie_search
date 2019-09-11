@@ -4,7 +4,7 @@ import NavBar from './components/NavBar';
 import Home from './containers/Home';
 import { HashRouter, Route, Switch } from "react-router-dom";
 import { fetchData, fetchMovieDetails, fetchImdbInformation } from "./actions/ThunkActions";
-import * as AppLogic from './exports/appLogic';
+import { movieUrls, imdbUrls, categories, createUrls } from './exports/appLogic';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -19,7 +19,7 @@ function App() {
    * FRONT-LOADS data and movie urls
    */
   useEffect(() => {
-    dispatch(fetchData(AppLogic.createUrls(AppLogic.categories, AppLogic.movieUrls)));
+    dispatch(fetchData(createUrls(categories, movieUrls)));
   }, [dispatch]);
 
   /**
@@ -27,22 +27,26 @@ function App() {
    */
   useEffect(() => {
     movieIds.popular.length > 1 &&
+    movieIds.upcoming.length > 1 &&
     dispatch(fetchMovieDetails(
-      AppLogic.createUrls(movieIds.topRated, AppLogic.movieUrls),
-      AppLogic.createUrls(movieIds.popular, AppLogic.movieUrls)
+      createUrls(movieIds.topRated, movieUrls),
+      createUrls(movieIds.popular, movieUrls),
+      createUrls(movieIds.upcoming, movieUrls),
     ));
-  }, [movieIds, dispatch])
+  }, [movieIds.upcoming, dispatch])
 
   /**
    * Obtaines IMDB information per category.
    */
   useEffect(() => {
     imdbIds.popularIds.length > 1 &&
+    imdbIds.upcomingIds.length > 1 &&
     dispatch(fetchImdbInformation(
-      AppLogic.createUrls(imdbIds.topRatedIds, AppLogic.imdbUrls),
-      AppLogic.createUrls(imdbIds.popularIds, AppLogic.imdbUrls)
+      createUrls(imdbIds.topRatedIds, imdbUrls),
+      createUrls(imdbIds.popularIds, imdbUrls),
+      createUrls(imdbIds.upcomingIds, imdbUrls),
     ));
-  }, [imdbIds, dispatch])
+  }, [imdbIds.upcomingIds, dispatch])
 
   return (
     <HashRouter>

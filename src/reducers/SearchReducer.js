@@ -10,10 +10,12 @@ const initialState = {
     data: {
         topRated: [],
         popular: [],
+        upcoming: [],
     },
     movieIds: {
         topRated: [],
-        popular: []
+        popular: [],
+        upcoming: [],
     },
 
 };
@@ -44,6 +46,9 @@ export default function SearchReducer(state=initialState, action) {
                     }),
                     popular: action.id2.map(res => {
                         return res.id;
+                    }),
+                    upcoming: action.id3.map(res => {
+                        return res.id;
                     })
                 }   
             }
@@ -53,7 +58,8 @@ export default function SearchReducer(state=initialState, action) {
                 ...state,
                 data: {
                     topRated: [action.data1],
-                    popular: [action.data2]    
+                    popular: [action.data2],
+                    upcoming: [action.data3]    
                 },
             }
         

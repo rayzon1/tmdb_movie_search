@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import PosterSlider from "../components/PosterSlider";
 import { useSelector, useDispatch } from "react-redux";
 import MovieContent from "../components/MovieContent";
-import * as PosterClickActions from "../actions/PosterClickActions";
+import { changeClickState, setClickedFalse } from "../actions/PosterClickActions";
 
 // const omdb = `http://www.omdbapi.com/?apikey=${apiKey}&i=tt2837574`;
 
@@ -14,16 +14,11 @@ const getVideoKeys = 'https://api.themoviedb.org/3/movie/423204/videos?api_key=6
 export default function Home() {
 
   // Main Movie data. State for each category.
-  const topRatedData = useSelector(state => state.search.data.topRated["0"]);
-  const popularData = useSelector(state => state.search.data.popular["0"]);
-
-  // Movie detail data. State for each category.
-  const topRatedDetails = useSelector(state => state.movie.details.topRatedDetails["0"]);
-  const popularDetails = useSelector(state => state.movie.details.popularDetails["0"]);
+  const data = useSelector(state => state.search.data);
+  const details = useSelector(state => state.movie.details);
 
   // imdbInformation. State for each category.
-  const topRatedImdbInformation = useSelector(state => state.movie.imdbInformation.topRatedImdb["0"]);
-  const popularImdbInformation = useSelector(state => state.movie.imdbInformation.popularImdb["0"]);
+  const imdbInformation = useSelector(state => state.movie.imdbInformation);
 
   // posterClickState. State for poster clicks, to see which to show or hide.
   const clickPosterState = useSelector(state => state.posterClickState.clickState)
@@ -36,23 +31,38 @@ export default function Home() {
    * @param {number} index
    * @param {string} item
    */
-  const dispatchClickState = (i, item) => {
-    dispatch(PosterClickActions.changeClickState(i, item));
-  }
 
+  const dispatchClickState = useCallback((i, item) => {
+    return dispatch(changeClickState(i, item));
+  }, [])
+
+  const setClickFalse = useCallback(category => {
+    return dispatch(setClickedFalse(category));
+  }, [])
+
+  
   // Side-effect listening for topRated click.
   useEffect(() => {
-    if(clickPosterState.topRated.clicked){
-       dispatch(PosterClickActions.setClickedFalse('popular'));
-    } 
+    if (clickPosterState.topRated.clicked) {
+      setClickFalse('popular');
+      setClickFalse('upcoming');
+    }
   }, [clickPosterState.topRated.clicked])
 
-  // Side-effect listening for popular click.
   useEffect(() => {
-    if(clickPosterState.popular.clicked){
-       dispatch(PosterClickActions.setClickedFalse('topRated'));
+    if (clickPosterState.popular.clicked) {
+      setClickFalse('upcoming');
+      setClickFalse('topRated');
     } 
   }, [clickPosterState.popular.clicked])
+
+  useEffect(() => {
+    if(clickPosterState.upcoming.clicked) {
+      setClickFalse('popular');
+      setClickFalse('topRated');
+    } 
+  }, [clickPosterState.upcoming.clicked])
+
 
   /**
    * Component creator will generate posterSlider component depending on params.
@@ -92,11 +102,14 @@ export default function Home() {
 
   return (
     <>
-      {createPosterSliderComponent('Top Rated', topRatedData, dispatchClickState, 'topRated')}
-      {createMovieContentComponent(topRatedData, clickPosterState.topRated, topRatedDetails, topRatedImdbInformation)}
+      {createPosterSliderComponent('Top Rated', data.topRated["0"], dispatchClickState, 'topRated')}
+      {createMovieContentComponent(data.topRated["0"], clickPosterState.topRated, details.topRatedDetails["0"], imdbInformation.topRatedImdb["0"])}
 
-      {createPosterSliderComponent('Popular', popularData, dispatchClickState, 'popular')}
-      {createMovieContentComponent(popularData, clickPosterState.popular, popularDetails, popularImdbInformation)}
+      {createPosterSliderComponent('Popular', data.popular["0"], dispatchClickState, 'popular')}
+      {createMovieContentComponent(data.popular["0"], clickPosterState.popular, details.popularDetails["0"], imdbInformation.popularImdb["0"])}
+
+      {createPosterSliderComponent('Upcoming', data.upcoming["0"], dispatchClickState, 'upcoming')}
+      {createMovieContentComponent(data.upcoming["0"], clickPosterState.upcoming, details.upcomingDetails["0"], imdbInformation.upcomingImdb["0"])}
     </>
   );
 }

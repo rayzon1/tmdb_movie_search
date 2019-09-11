@@ -1,26 +1,27 @@
 import * as MovieActionTypes from "../actiontypes/MovieActionTypes";
 
-export const getPosterUrl = (items1, items2) => {
+export const getPosterUrl = (items1, items2, items3) => {
   return {
     type: MovieActionTypes.GET_POSTER_URL,
     items1,
-    items2
+    items2,
+    items3
   };
 };
 
-export const getMovieDetails = (arr1, arr2) => {
+export const getMovieDetails = (arr, category) => {
   return {
     type: MovieActionTypes.GET_MOVIE_DETAILS,
-    arr1,
-    arr2
+    arr,
+    category
   }
 }
 
-export const getImdbIds = (items1, items2) => {
+export const getImdbIds = (items, category) => {
   return {
     type: MovieActionTypes.GET_IMDB_IDS,
-    items1,
-    items2
+    items,
+    category
   }
 }
 

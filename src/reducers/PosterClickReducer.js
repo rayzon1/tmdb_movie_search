@@ -9,6 +9,10 @@ const initialState = {
     popular: {
       index: 0,
       clicked: false
+    },
+    upcoming: {
+      index: 0,
+      clicked: false
     }
   }
 };
@@ -42,7 +46,16 @@ export default function PosterClickReducer(state = initialState, action) {
                   state.clickState.popular.clicked,
                   state.clickState.popular
                 )
-              : { ...state.clickState.popular }
+              : { ...state.clickState.popular },
+          upcoming:
+            action.item === "upcoming"
+              ? returnClick(
+                  action.index,
+                  state.clickState.upcoming.index,
+                  state.clickState.upcoming.clicked,
+                  state.clickState.upcoming
+                )
+              : { ...state.clickState.upcoming },
         }
       };
 
@@ -52,11 +65,15 @@ export default function PosterClickReducer(state = initialState, action) {
         clickState: {
           topRated: {
             ...state.clickState.topRated,
-            clicked: action.item === "topRated" ? false : true
+            clicked: action.item === "topRated" ? false : state.clickState.topRated.clicked
           },
           popular: {
             ...state.clickState.popular,
-            clicked: action.item === "popular" ? false : true
+            clicked: action.item === "popular" ? false : state.clickState.popular.clicked
+          },
+          upcoming: {
+            ...state.clickState.upcoming,
+            clicked: action.item === "upcoming" ? false : state.clickState.upcoming.clicked
           }
         }
       };

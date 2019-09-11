@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../modules/component-modules/moviecontent-comp.module.css";
-import PropTypes from "prop-types";
 import imdb_logo from "../images/icons/imdb_logo.png";
 import metacritic from "../images/icons/metacritic.png";
 import rt from "../images/icons/rt.png";
@@ -102,8 +101,3 @@ export default function MovieContent({
   );
 }
 
-MovieContent.propTypes = {
-  data: PropTypes.object.isRequired,
-  posterStatus: PropTypes.object.isRequired,
-  details: PropTypes.object.isRequired
-};
