@@ -1,7 +1,6 @@
 import { authToken, apiKey } from "../config";
 import axios from 'axios';
 
-
 /**
  * Creates movie categories to put in thunk dispatch.
  */
@@ -17,7 +16,8 @@ export const imdbUrls = data => {
 export const categories = [
     'top_rated',
     'popular',
-    'upcoming'
+    'upcoming',
+    'now_playing'
 ]
 
 export const createUrls = (items, func) => {
@@ -25,3 +25,27 @@ export const createUrls = (items, func) => {
         return axios.get(func(item));
     })
 }
+
+export const sendUrls = (arr, urls) => {
+    return arr.map(data => {
+      return createUrls(data, urls);
+    })
+  }
+
+export const movieIdArray = arr =>{
+    return [
+      arr.topRated,
+      arr.popular,
+      arr.upcoming,
+      arr.nowPlaying
+    ]
+  } 
+
+export const imdbIdArray = arr => {
+    return [
+      arr.topRatedIds,
+      arr.popularIds,
+      arr.upcomingIds,
+      arr.nowPlayingIds
+    ]
+  }

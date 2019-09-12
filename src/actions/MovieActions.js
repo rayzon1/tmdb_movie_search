@@ -1,11 +1,12 @@
 import * as MovieActionTypes from "../actiontypes/MovieActionTypes";
 
-export const getPosterUrl = (items1, items2, items3) => {
+export const getPosterUrl = (items1, items2, items3, items4) => {
   return {
     type: MovieActionTypes.GET_POSTER_URL,
     items1,
     items2,
-    items3
+    items3,
+    items4
   };
 };
 

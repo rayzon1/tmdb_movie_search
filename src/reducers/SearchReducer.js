@@ -11,11 +11,13 @@ const initialState = {
         topRated: [],
         popular: [],
         upcoming: [],
+        nowPlaying: []
     },
     movieIds: {
         topRated: [],
         popular: [],
         upcoming: [],
+        nowPlaying: [],
     },
 
 };
@@ -49,6 +51,9 @@ export default function SearchReducer(state=initialState, action) {
                     }),
                     upcoming: action.id3.map(res => {
                         return res.id;
+                    }),
+                    nowPlaying: action.id4.map(res => {
+                        return res.id;
                     })
                 }   
             }
@@ -59,7 +64,8 @@ export default function SearchReducer(state=initialState, action) {
                 data: {
                     topRated: [action.data1],
                     popular: [action.data2],
-                    upcoming: [action.data3]    
+                    upcoming: [action.data3],
+                    nowPlaying: [action.data4]    
                 },
             }
         

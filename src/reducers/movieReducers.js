@@ -9,21 +9,25 @@ const initialState = {
         topRated: [],
         popular: [],
         upcoming: [],
+        nowPlaying: []
     },
     details: {
         topRatedDetails: [],
         popularDetails: [],
         upcomingDetails: [],
+        nowPlayingDetails: []
     },
     imdbIds: {
         topRatedIds: [],
         popularIds: [],
         upcomingIds: [],
+        nowPlayingIds: []
     },
     imdbInformation: {
         topRatedImdb: [],
         popularImdb: [],
         upcomingImdb: [],
+        nowPlayingImdb: []
     }
 }
 
@@ -44,7 +48,8 @@ export default function movieReducer(state = initialState, action) {
                 url: {
                     topRated: backdropUrls(action.items1),
                     popular: backdropUrls(action.items2),
-                    upcoming: backdropUrls(action.items3)
+                    upcoming: backdropUrls(action.items3),
+                    nowPlaying: backdropUrls(action.items4)
                 }
             }
       
@@ -54,7 +59,8 @@ export default function movieReducer(state = initialState, action) {
                 details: {
                     topRatedDetails: action.category === 'topRated' ? [action.arr] : [...state.details.topRatedDetails],
                     popularDetails: action.category === 'popular' ? [action.arr] : [...state.details.popularDetails],
-                    upcomingDetails: action.category === 'upcoming' ? [action.arr] : [...state.details.upcomingDetails]
+                    upcomingDetails: action.category === 'upcoming' ? [action.arr] : [...state.details.upcomingDetails],
+                    nowPlayingDetails: action.category === 'nowPlaying' ? [action.arr] : [...state.details.nowPlayingDetails]
                 }
             }
 
@@ -71,6 +77,9 @@ export default function movieReducer(state = initialState, action) {
                     upcomingIds: action.category === 'upcoming' ? action.items.map(res => {
                         return res.imdb_id;
                     }) : [...state.imdbIds.upcomingIds],
+                    nowPlayingIds: action.category === 'nowPlaying' ? action.items.map(res => {
+                        return res.imdb_id;
+                    }) : [...state.imdbIds.nowPlayingIds],
                 }
                 
                 
@@ -83,6 +92,7 @@ export default function movieReducer(state = initialState, action) {
                     topRatedImdb: action.category === 'topRated' ? [action.items] : [...state.imdbInformation.topRatedImdb],
                     popularImdb: action.category === 'popular' ? [action.items] : [...state.imdbInformation.popularImdb],
                     upcomingImdb: action.category === 'upcoming' ? [action.items] : [...state.imdbInformation.upcomingImdb],
+                    nowPlayingImdb: action.category === 'nowPlaying' ? [action.items] : [...state.imdbInformation.nowPlayingImdb],
                 }
             }
 

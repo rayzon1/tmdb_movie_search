@@ -4,7 +4,7 @@ import NavBar from './components/NavBar';
 import Home from './containers/Home';
 import { HashRouter, Route, Switch } from "react-router-dom";
 import { fetchData, fetchMovieDetails, fetchImdbInformation } from "./actions/ThunkActions";
-import { movieUrls, imdbUrls, categories, createUrls } from './exports/appLogic';
+import { movieUrls, imdbUrls, categories, createUrls, sendUrls, movieIdArray, imdbIdArray } from './exports/AppLogic';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -14,28 +14,6 @@ function App() {
   const imdbIds = useSelector(state => state.movie.imdbIds);
 
   const dispatch = useDispatch();
-
-  const sendUrls = (arr, urls) => {
-    return arr.map(data => {
-      return createUrls(data, urls);
-    })
-  }
-
-  const movieIdArray = arr =>{
-    return [
-      arr.topRated,
-      arr.popular,
-      arr.upcoming
-    ]
-  } 
-
-  const imdbIdArray = arr => {
-    return [
-      arr.topRatedIds,
-      arr.popularIds,
-      arr.upcomingIds
-    ]
-  }
 
   /**
    * FRONT-LOADS data and movie urls
@@ -49,27 +27,23 @@ function App() {
    */
   useEffect(() => {
     movieIds.popular.length > 1 &&
-    movieIds.upcoming.length > 1 &&
+    movieIds.nowPlaying.length > 1 &&
     dispatch(fetchMovieDetails(
-      // createUrls(movieIds.topRated, movieUrls),
-      // createUrls(movieIds.popular, movieUrls),
-      // createUrls(movieIds.upcoming, movieUrls),
       sendUrls(movieIdArray(movieIds), movieUrls)
     ));
-  }, [movieIds.upcoming, dispatch])
+  }, [movieIds.nowPlaying, dispatch])
 
   /**
    * Obtaines IMDB information per category.
    */
   useEffect(() => {
     imdbIds.popularIds.length > 1 &&
-    imdbIds.upcomingIds.length > 1 &&
+    imdbIds.topRatedIds.length > 1 &&
+    imdbIds.nowPlayingIds.length > 1 &&
     dispatch(fetchImdbInformation(
-      createUrls(imdbIds.topRatedIds, imdbUrls),
-      createUrls(imdbIds.popularIds, imdbUrls),
-      createUrls(imdbIds.upcomingIds, imdbUrls),
+      sendUrls(imdbIdArray(imdbIds), imdbUrls)
     ));
-  }, [imdbIds.upcomingIds, dispatch])
+  }, [imdbIds.topRatedIds, imdbIds.popularIds])
 
   return (
     <HashRouter>

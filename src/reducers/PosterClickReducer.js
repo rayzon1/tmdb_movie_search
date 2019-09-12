@@ -13,6 +13,10 @@ const initialState = {
     upcoming: {
       index: 0,
       clicked: false
+    },
+    nowPlaying: {
+      index: 0,
+      clicked: false
     }
   }
 };
@@ -56,6 +60,15 @@ export default function PosterClickReducer(state = initialState, action) {
                   state.clickState.upcoming
                 )
               : { ...state.clickState.upcoming },
+          nowPlaying:
+            action.item === "nowPlaying"
+              ? returnClick(
+                  action.index,
+                  state.clickState.nowPlaying.index,
+                  state.clickState.nowPlaying.clicked,
+                  state.clickState.nowPlaying
+                )
+              : { ...state.clickState.nowPlaying },
         }
       };
 
@@ -74,6 +87,10 @@ export default function PosterClickReducer(state = initialState, action) {
           upcoming: {
             ...state.clickState.upcoming,
             clicked: action.item === "upcoming" ? false : state.clickState.upcoming.clicked
+          },
+          nowPlaying: {
+            ...state.clickState.nowPlaying,
+            clicked: action.item === "nowPlaying" ? false : state.clickState.nowPlaying.clicked
           }
         }
       };

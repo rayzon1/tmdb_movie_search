@@ -3,6 +3,7 @@ import PosterSlider from "../components/PosterSlider";
 import { useSelector, useDispatch } from "react-redux";
 import MovieContent from "../components/MovieContent";
 import { changeClickState, setClickedFalse } from "../actions/PosterClickActions";
+// import { categories } from "../exports/ThunkActionsLogic";
 
 // const omdb = `http://www.omdbapi.com/?apikey=${apiKey}&i=tt2837574`;
 
@@ -36,32 +37,43 @@ export default function Home() {
     return dispatch(changeClickState(i, item));
   }, [])
 
-  const setClickFalse = useCallback(category => {
-    return dispatch(setClickedFalse(category));
+  const setClickFalse = useCallback(arr => {
+    return arr.map(cat => {
+      return dispatch(setClickedFalse(cat));
+    })
   }, [])
 
+  const category = {
+    topRate: ['popular', 'upcoming', 'nowPlaying'],
+    popular: ['upcoming', 'topRated', 'nowPlaying'],
+    upcoming: ['popular', 'topRated', 'nowPlaying'],
+    nowPlaying: ['topRated', 'popular', 'upcoming']
+  }
   
-  // Side-effect listening for topRated click.
+  // Side-effect topRated click.
   useEffect(() => {
     if (clickPosterState.topRated.clicked) {
-      setClickFalse('popular');
-      setClickFalse('upcoming');
+      setClickFalse(category.topRate);
     }
   }, [clickPosterState.topRated.clicked])
 
   useEffect(() => {
     if (clickPosterState.popular.clicked) {
-      setClickFalse('upcoming');
-      setClickFalse('topRated');
+      setClickFalse(category.popular)
     } 
   }, [clickPosterState.popular.clicked])
 
   useEffect(() => {
     if(clickPosterState.upcoming.clicked) {
-      setClickFalse('popular');
-      setClickFalse('topRated');
+      setClickFalse(category.upcoming)
     } 
   }, [clickPosterState.upcoming.clicked])
+
+  useEffect(() => {
+    if(clickPosterState.nowPlaying.clicked) {
+      setClickFalse(category.nowPlaying)
+    } 
+  }, [clickPosterState.nowPlaying.clicked])
 
 
   /**
@@ -110,6 +122,9 @@ export default function Home() {
 
       {createPosterSliderComponent('Upcoming', data.upcoming["0"], dispatchClickState, 'upcoming')}
       {createMovieContentComponent(data.upcoming["0"], clickPosterState.upcoming, details.upcomingDetails["0"], imdbInformation.upcomingImdb["0"])}
+
+      {createPosterSliderComponent('Now Playing', data.nowPlaying["0"], dispatchClickState, 'nowPlaying')}
+      {createMovieContentComponent(data.nowPlaying["0"], clickPosterState.nowPlaying, details.nowPlayingDetails["0"], imdbInformation.nowPlayingImdb["0"])}
     </>
   );
 }
