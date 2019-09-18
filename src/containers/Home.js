@@ -3,7 +3,6 @@ import PosterSlider from "../components/PosterSlider";
 import { useSelector, useDispatch } from "react-redux";
 import MovieContent from "../components/MovieContent";
 import { changeClickState, setClickedFalse } from "../actions/PosterClickActions";
-// import { categories } from "../exports/ThunkActionsLogic";
 
 // const omdb = `http://www.omdbapi.com/?apikey=${apiKey}&i=tt2837574`;
 
@@ -11,6 +10,9 @@ const videos = 'https://www.youtube.com/watch?v=' // + KEY
 
 // Need to use movieIds to find video key to add to youtube url above.
 const getVideoKeys = 'https://api.themoviedb.org/3/movie/423204/videos?api_key=6d1e723cd6edce1af3e8bf19b4ce51db&language=en-US';
+
+
+
 
 export default function Home() {
 
@@ -32,16 +34,15 @@ export default function Home() {
    * @param {number} index
    * @param {string} item
    */
-
   const dispatchClickState = useCallback((i, item) => {
     return dispatch(changeClickState(i, item));
-  }, [])
+  }, [dispatch])
 
   const setClickFalse = useCallback(arr => {
     return arr.map(cat => {
       return dispatch(setClickedFalse(cat));
     })
-  }, [])
+  }, [dispatch])
 
   const category = {
     topRate: ['popular', 'upcoming', 'nowPlaying'],
@@ -79,7 +80,7 @@ export default function Home() {
   /**
    * Component creator will generate posterSlider component depending on params.
    * @param {string} title - Title of specific slider.
-   * @param {Object} data - Data object retrieved from state.
+   * @param {obj} data - Data object retrieved from state.
    * @param {function} getPosterStatus - Function with dispatch.
    * @param {string} category - Category string.
    */
@@ -115,7 +116,7 @@ export default function Home() {
   return (
     <>
       {createPosterSliderComponent('Top Rated', data.topRated["0"], dispatchClickState, 'topRated')}
-      {createMovieContentComponent(data.topRated["0"], clickPosterState.topRated, details.topRatedDetails["0"], imdbInformation.topRatedImdb["0"])}
+      {createMovieContentComponent(data.topRated["0"], clickPosterState.topRated, details.topRatedDetails["0"], imdbInformation.topRatedImdb["0"] )}
 
       {createPosterSliderComponent('Popular', data.popular["0"], dispatchClickState, 'popular')}
       {createMovieContentComponent(data.popular["0"], clickPosterState.popular, details.popularDetails["0"], imdbInformation.popularImdb["0"])}

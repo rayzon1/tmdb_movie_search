@@ -30,7 +30,7 @@ export default function MovieContent({
             <span className={styles.reviewLogoContainer}>
               <img
                 src={reviewLogos.imdb_logo}
-                style={{ width: "5%", borderRadius: "25px" }}
+                style={{ width: "3%", borderRadius: "25px" }}
                 alt="imdb-logo"
               />{" "}
               {data.Value}
@@ -40,7 +40,7 @@ export default function MovieContent({
         if (data.Source.includes("Rotten")) {
           return (
             <span className={styles.reviewLogoContainer}>
-              <img src={reviewLogos.rt} style={{ width: "5%" }} alt="rt-logo" />{" "}
+              <img src={reviewLogos.rt} style={{ width: "3%" }} alt="rt-logo" />{" "}
               {data.Value}
             </span>
           );
@@ -50,7 +50,7 @@ export default function MovieContent({
             <span className={styles.reviewLogoContainer}>
               <img
                 src={reviewLogos.metacritic}
-                style={{ width: "5%" }}
+                style={{ width: "3%" }}
                 alt="meta-logo"
               />{" "}
               {data.Value}

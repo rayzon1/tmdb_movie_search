@@ -3,14 +3,22 @@ import axios from 'axios';
 
 /**
  * Creates movie categories to put in thunk dispatch.
+ * @param {number} data Will take movieID.
  */
-
 export const movieUrls = data => {
     return `https://api.themoviedb.org/3/movie/${data}?api_key=${authToken}&language=en-US`;
-  }
+}
 
+/**
+ * Function creates the urls using imdbIds.
+ * @param {string} data This will be the search/keyword/id.
+ */
 export const imdbUrls = data => {
     return `http://www.omdbapi.com/?apikey=${apiKey}&i=${data}`
+}
+
+export const videoUrls = data => {
+  return `https://api.themoviedb.org/3/movie/${data}/videos?api_key=${authToken}&language=en-US`
 }
 
 export const categories = [

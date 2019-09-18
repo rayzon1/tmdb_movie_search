@@ -11,7 +11,8 @@ import {
   getImdbIds,
   getImdbInformation
 } from "./MovieActions";
-import { categories, setAsyncThen } from '../exports/ThunkActionsLogic';
+import { categories, setAsyncThen, manageResults } from "../exports/ThunkActionsLogic";
+import { getVideoKeys } from "./VideoTrailerActions";
 
 /**
  * THUNK ACTION                                                                                                                                                    N TO RETREIVE ALL IMDB ID MOVIE DETAILS.
@@ -25,7 +26,7 @@ export const fetchImdbInformation = urlArray => {
       categories,
       dispatch,
       getImdbInformation
-    )
+    );
   };
 };
 
@@ -39,6 +40,22 @@ export const fetchMovieDetails = urlArray => {
       dispatch,
       getMovieDetails,
       getImdbIds
+    );
+  };
+};
+
+export const fetchVideoKeys = urlArray => {
+  return dispatch => {
+    dispatch(isLoading(true));
+    axios
+      .all(urlArray)
+      .then(
+       (top) => {
+          
+            dispatch(getVideoKeys(top));
+          
+          
+        }
     );
   };
 };
@@ -57,10 +74,20 @@ export const fetchData = url => {
         axios.spread((top, pop, up, now) => {
           dispatch(getCategoryData(top.data, pop.data, up.data, now.data));
           dispatch(
-            getMovieIds(top.data.results, pop.data.results, up.data.results, now.data.results)
+            getMovieIds(
+              top.data.results,
+              pop.data.results,
+              up.data.results,
+              now.data.results
+            )
           );
           dispatch(
-            getPosterUrl(top.data.results, pop.data.results, up.data.results, now.data.results)
+            getPosterUrl(
+              top.data.results,
+              pop.data.results,
+              up.data.results,
+              now.data.results
+            )
           );
           dispatch(isLoading(false));
         })

@@ -31,8 +31,9 @@ export default function PosterSlider({
               alt="tiles"
             />
           </div>
-          <div className={styles.tile__details}>
-            <div className={styles.tile__title}>{data.original_title}</div>
+          <div className={styles.tile__details} >
+            <div className={styles.play__click} onClick={() => console.log('fuck')} />
+            <div className={styles.tile__title} >{data.original_title}</div>
           </div>
         </div>
       ))

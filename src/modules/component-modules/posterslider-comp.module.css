@@ -7,6 +7,9 @@
   }
   .contain {
     width: 100%;
+    /* display: inline-flex;
+    justify-content: center;
+    overflow: visible; */
   }
   .row {
     overflow: scroll;
@@ -22,6 +25,14 @@
     padding-bottom: 10px;
     /* overflow: auto; */
   }
+
+  .play__click {
+    align-self: center;
+    z-index: 2;
+    width: 45px;
+    height: 45px;
+  }
+
   .tile {
     position: relative;
     display: inline-block;
@@ -42,6 +53,9 @@
   }
   .tile__details {
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-content: center;
     bottom: 0;
     left: 0;
     right: 0;
