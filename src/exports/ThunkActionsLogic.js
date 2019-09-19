@@ -17,7 +17,7 @@ export const asyncThen = (url, dis1, dis2, category, func, action, action2) => {
   }).catch(err => {
     func(searchError(true));
     console.error(
-      "There was an eror",
+      "There was an error",
       err.code
     );
   });

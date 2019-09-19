@@ -11,10 +11,10 @@ import * as VideoTrailerActionTypes from '../actiontypes/VideoTrailerActionTypes
  // 4. Store the results of the endpoint (youtube keys for movie trailers) in an array within the store.
  // 5. User youtube keys to display movie trailer videos 
  
- export const getVideoKeys = data => {
+ export const getVideoKeys = (data) => {
     return {
         type: VideoTrailerActionTypes.GET_VIDEO_KEYS,
-        payload: data
+        payload: data,
     }
  }
 

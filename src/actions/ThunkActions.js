@@ -11,7 +11,11 @@ import {
   getImdbIds,
   getImdbInformation
 } from "./MovieActions";
-import { categories, setAsyncThen, manageResults } from "../exports/ThunkActionsLogic";
+import {
+  categories,
+  setAsyncThen,
+  manageResults
+} from "../exports/ThunkActionsLogic";
 import { getVideoKeys } from "./VideoTrailerActions";
 
 /**
@@ -44,19 +48,48 @@ export const fetchMovieDetails = urlArray => {
   };
 };
 
-export const fetchVideoKeys = urlArray => {
+const categoryHold = {
+  
+};
+
+//TODO: Create multiple axios calls. One for each category is needed.
+export const fetchVideoKeys = (topRated, popular, upcoming, nowPlaying) => {
   return dispatch => {
     dispatch(isLoading(true));
     axios
-      .all(urlArray)
+      .all(topRated)
       .then(
-       (top) => {
-          
-            dispatch(getVideoKeys(top));
-          
-          
-        }
-    );
+        top =>
+          (categoryHold.topRated = top.map(data =>
+            data.data
+          ))
+      );
+    axios
+      .all(popular)
+      .then(
+        pop =>
+          (categoryHold.popular = pop.map(data =>
+            data.data
+          ))
+      );
+    axios
+      .all(upcoming)
+      .then(
+        up =>
+          (categoryHold.upcoming = up.map(data =>
+            data.data
+          ))
+      );
+    axios
+      .all(nowPlaying)
+      .then(
+        now =>
+          (categoryHold.nowPlaying = now.map(data =>
+            data.data
+          ))
+      )
+      .then(setTimeout(() => console.log(categoryHold.topRated), 1))
+      .then(setTimeout(() => dispatch(getVideoKeys(categoryHold)), 5));
   };
 };
 

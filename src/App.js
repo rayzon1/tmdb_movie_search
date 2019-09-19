@@ -54,7 +54,6 @@ function App() {
    * Obtaines IMDB information per category.
    */
   
-
   useEffect(() => {
     imdbIds.popularIds.length > 1 &&
       imdbIds.topRatedIds.length > 1 &&
@@ -77,13 +76,13 @@ function App() {
       setTimeout(() => {
         dispatch(
           fetchVideoKeys(
-           createUrls(movieIds.popular, videoUrls),
-          //  createUrls(movieIds.popular, videoUrls),
-          //  createUrls(movieIds.upcoming, videoUrls),
-          //  createUrls(movieIds.nowPlaying, videoUrls)
+           [...createUrls(movieIds.topRated, videoUrls)], 
+           [...createUrls(movieIds.popular, videoUrls)],
+           [...createUrls(movieIds.upcoming, videoUrls)],
+           [...createUrls(movieIds.nowPlaying, videoUrls)],
           )
         );
-      }, 1000);
+      }, 2000);
   }, [
     movieIds.topRated,
     movieIds.popular,

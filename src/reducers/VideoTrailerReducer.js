@@ -16,8 +16,10 @@ export default function VideoTrailerReducer(state=initialState, action) {
         case VideoTrailerActionTypes.GET_VIDEO_KEYS:
             return {
                 videoKeys: {
-                    topRated: [action.payload],
-                    
+                    topRated: action.payload.topRated,
+                    popular: action.payload.popular,
+                    upcoming: action.payload.upcoming,
+                    nowPlaying: action.payload.nowPlaying
                 }
             }
     

@@ -24,7 +24,9 @@ export default function Home() {
   const imdbInformation = useSelector(state => state.movie.imdbInformation);
 
   // posterClickState. State for poster clicks, to see which to show or hide.
-  const clickPosterState = useSelector(state => state.posterClickState.clickState)
+  const clickPosterState = useSelector(state => state.posterClickState.clickState);
+
+  const trailerLinks = useSelector(state => state.videoTrailers.videoKeys);
  
   // useDispatch hook to dispatch actions to Redux.
   const dispatch = useDispatch();
@@ -94,6 +96,7 @@ export default function Home() {
           data={data}
           getPosterStatus={getPosterStatus}
           category={category}
+          trailerLinks={trailerLinks && trailerLinks}
         />
       </>
     )
