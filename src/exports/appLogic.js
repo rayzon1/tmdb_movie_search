@@ -1,9 +1,12 @@
-import { authToken, apiKey } from "../config";
+import { authToken, apiKey, newsApiKey } from "../config";
 import axios from 'axios';
+
+
+
+const todayDate = new Date().toISOString().slice(0,10);
 
 /**
  * Creates movie categories to put in thunk dispatch.
- * @param {number} data Will take movieID.
  */
 export const movieUrls = data => {
     return `https://api.themoviedb.org/3/movie/${data}?api_key=${authToken}&language=en-US`;
@@ -11,7 +14,6 @@ export const movieUrls = data => {
 
 /**
  * Function creates the urls using imdbIds.
- * @param {string} data This will be the search/keyword/id.
  */
 export const imdbUrls = data => {
     return `http://www.omdbapi.com/?apikey=${apiKey}&i=${data}`
@@ -20,6 +22,12 @@ export const imdbUrls = data => {
 export const videoUrls = data => {
   return `https://api.themoviedb.org/3/movie/${data}/videos?api_key=${authToken}&language=en-US`
 }
+
+export const movieNewsUrl = category => {
+  return `https://newsapi.org/v2/everything?q=${category}&from=${todayDate}&to=${todayDate}&sortBy=relevancy&apiKey=${newsApiKey}`
+}
+
+
 
 export const categories = [
     'top_rated',

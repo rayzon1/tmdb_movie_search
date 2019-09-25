@@ -1,0 +1,11 @@
+.bg {
+  background: url("../../images/signinbg.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 93.5vh;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}

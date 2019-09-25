@@ -7,26 +7,17 @@ export default function PosterSlider({
   data,
   getPosterStatus,
   category,
-  trailerLinks
+  getKeys,
+  videoKey
 }) {
   //! Map urls and combine to path to gather poster backdrops.
   //! https://image.tmdb.org/t/p/w500
 
   const [open, setOpen] = React.useState(false);
-  const [videoKey, getVideoKey] = React.useState(null);
 
   const handleOpen = () => {
     setOpen(true);
   };
-
-  const getKeys = (i) => {
-    const filteredReviews = trailerLinks.nowPlaying.filter((val, index) => index === i)[0].results.filter(data => data.size === 1080);
-    const rand = Math.ceil(Math.random() * filteredReviews.length)
-    // console.log(trailerLinks.nowPlaying.filter((val, index) => index === i)[0].results.filter(data => data.size === 1080)[0].key);
-    // console.log(rand);
-    getVideoKey(filteredReviews[rand].key);
-    videoKey && console.log(videoKey);
-  }
 
   /**
    * Mapped image tiles showing popular movies in scrollbar.
@@ -52,7 +43,7 @@ export default function PosterSlider({
           <div className={styles.tile__details} >
             <div className={styles.play__click} onClick={() => {
               handleOpen()
-              getKeys(index)
+              getKeys(index, category)
               }} />
             <div className={styles.tile__title} >{data.original_title}</div>
           </div>
@@ -67,7 +58,7 @@ export default function PosterSlider({
         <div className={styles.row}>
           <div className={styles.row__inner}>{imageTiles()}</div>
         </div>
-        <SimpleModal open={open} setOpen={setOpen} />
+        {videoKey && <SimpleModal open={open} setOpen={setOpen} videoKey={videoKey} />}
       </div>
     </>
   );

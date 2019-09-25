@@ -10,6 +10,12 @@
   display: none;
 }
 
+.reviewContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 25px;
+}
+
 .summary {
   color: white;    
   font-size: 22px;
@@ -22,6 +28,20 @@
 .contentContainer {
   width: 100%;
   text-align: justify;
+  margin-bottom: 45px;
+}
+
+.imdb_logo {
+  width: 3%; 
+  border-radius: 25px;
+}
+
+.rotten_logo {
+  width: 4%; 
+}
+
+.metacritic_logo {
+  width: 3%; 
 }
 
 .posterImage {
@@ -55,6 +75,11 @@
 
 @media only screen and (max-width: 1300px) {
 
+  .reviewContainer {
+    display: inline-block;
+    margin: 0;
+  }
+
   .content {
     display: flex;
     flex-direction: column;
@@ -66,8 +91,22 @@
 
   .contentContainer {
     width: 100%;
-    margin: 0px;
-    align-content: justify;
+    margin-bottom: 25px;
+  }
+
+  .imdb_logo {
+    width: 6%; 
+    border-radius: 25px;
+  }
+
+  .rotten_logo {
+    width: 8%; 
+    margin-left: 15px; 
+  }
+
+  .metacritic_logo {
+    width: 5%; 
+    margin-left: 15px; 
   }
 
   .productionLogo {

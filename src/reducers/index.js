@@ -2,6 +2,7 @@ import SearchReducer from "./SearchReducer";
 import movieReducer from "./movieReducers";
 import VideoTrailerReducer from "./VideoTrailerReducer";
 import PosterClickReducer from "./PosterClickReducer";
+import MediaNewsReducer from "./MediaNewsReducer";
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   search: SearchReducer,
   movie: movieReducer,
   posterClickState: PosterClickReducer,
-  videoTrailers: VideoTrailerReducer
+  videoTrailers: VideoTrailerReducer,
+  mediaNews: MediaNewsReducer,
 });
 
 const searchStore = () => {

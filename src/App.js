@@ -2,12 +2,15 @@ import React, { useEffect } from "react";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import Home from "./containers/Home";
+import SignIn from "./containers/SignIn";
+import LoadingSpinner from "./components/LoadingSpinner";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import {
   fetchData,
   fetchMovieDetails,
   fetchImdbInformation,
-  fetchVideoKeys
+  fetchVideoKeys,
+  fetchMovieNews
 } from "./actions/ThunkActions";
 import {
   movieUrls,
@@ -17,13 +20,16 @@ import {
   sendUrls,
   movieIdArray,
   imdbIdArray,
-  videoUrls
+  videoUrls,
+  movieNewsUrl
 } from "./exports/AppLogic";
 import { useDispatch, useSelector } from "react-redux";
+import TemporaryDrawer from './components/MenuDrawer';
 
 function App() {
   const movieIds = useSelector(state => state.search.movieIds);
   const imdbIds = useSelector(state => state.movie.imdbIds);
+  const searchLoader = useSelector(state => state.search)
 
   const dispatch = useDispatch();
 
@@ -32,7 +38,7 @@ function App() {
    */
   useEffect(() => {
     dispatch(fetchData(createUrls(categories, movieUrls)));
-  }, [dispatch]);
+  }, []);
 
   /**
    * Obtains Movie Ids per category.
@@ -43,6 +49,9 @@ function App() {
       movieIds.upcoming.length > 1 &&
       movieIds.topRated.length > 1 &&
       dispatch(fetchMovieDetails(sendUrls(movieIdArray(movieIds), movieUrls)));
+      return  () => {
+        console.log('unmounted')
+      }
   }, [
     movieIds.nowPlaying,
     movieIds.popular,
@@ -60,6 +69,9 @@ function App() {
       imdbIds.upcomingIds.length > 1 &&
       imdbIds.nowPlayingIds.length > 1 &&
       dispatch(fetchImdbInformation(sendUrls(imdbIdArray(imdbIds), imdbUrls)));
+      return  () => {
+        console.log('unmounted')
+      }
   }, [
     imdbIds.topRatedIds,
     imdbIds.popularIds,
@@ -82,7 +94,10 @@ function App() {
            [...createUrls(movieIds.nowPlaying, videoUrls)],
           )
         );
-      }, 2000);
+      }, 1000);
+      return  () => {
+        console.log('unmounted')
+      }
   }, [
     movieIds.topRated,
     movieIds.popular,
@@ -90,13 +105,34 @@ function App() {
     movieIds.upcoming
   ]);
 
+  useEffect(() => {
+    dispatch(fetchMovieNews(movieNewsUrl('movies')));
+  }, [])
+
+
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
+  const toggleDrawer = (side, open) => event => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [side]: open });
+  };
+
   return (
     <HashRouter>
       <Switch>
         <div className="App">
-          <NavBar />
-          <Route exact path="/" render={() => <p>Sign In Page</p>} />
-          <Route exact path="/home" render={() => <Home />} />
+          <NavBar toggleDrawer={toggleDrawer}/>
+          <TemporaryDrawer state={state} setState={setState} toggleDrawer={toggleDrawer}/>
+          <Route exact path="/" render={() => <SignIn />} />
+          <Route exact path="/home" render={() => searchLoader.isLoading ? <LoadingSpinner /> : <Home />} />
         </div>
       </Switch>
     </HashRouter>

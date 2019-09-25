@@ -1,0 +1,1 @@
+export const GET_MEDIA_NEWS = 'media/GET_MEDIA_NEWS';

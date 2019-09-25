@@ -1,7 +1,7 @@
   html {
     padding: 0;
     margin: 0;
-    background: #0e0f11;
+    /* background: #0e0f11; */
     color: #ecf0f1;
     font-family: 'Open Sans', sans-serif;
   }
@@ -71,7 +71,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    display: #000;
+    /* display: #000; */
   }
   .tile__details:after {
     margin-top: -25px;
@@ -82,7 +82,7 @@
     line-height: 50px;
     text-align: center;
     border-radius: 100%;
-    background: rgba(0,0,0,0.5);
+    /* background: rgba(0,0,0,0.5); */
     z-index: 1;
   }
   .tile__details:before {
@@ -120,9 +120,9 @@
             transform: translate3d(144px, 0, 0);
   }
   
-  @media only screen and (max-width: 1300px) {
+  /* @media only screen and (max-width: 1300px) {
 
 
 
 
-  }
+  } */

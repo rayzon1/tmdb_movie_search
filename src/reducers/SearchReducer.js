@@ -27,16 +27,15 @@ export default function SearchReducer(state=initialState, action) {
     switch (action.type) {
         case SearchActionTypes.LOADING_DATA:
             return {
-                isLoading: true,
-                hasError: false,
-                ...state
+                ...state,
+                isLoading: action.bool,
+                
             }
 
         case SearchActionTypes.SEARCH_ERROR:
             return {
-                isLoading: false,
-                hasError: true,
-                ...state
+                ...state,
+                hasError: action.hasErrored,
             }
 
         case SearchActionTypes.MOVIE_IDS:

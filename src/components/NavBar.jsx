@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,22 +22,30 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function ButtonAppBar() {
+
+
+function ButtonAppBar({ toggleDrawer, history }) {
   const classes = useStyles();
+
+  const handleLinks = value => {
+    history.replace(value)
+  };
 
   return (
     <div className={classes.root}>
       <AppBar position="static" style={{background: 'rgb(20, 20, 20)'}}>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+            <MenuIcon onClick={toggleDrawer('left', true)}/>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             NETFLIX
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" onClick={() => handleLinks('/')}>Login</Button>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
+
+export default withRouter(ButtonAppBar);

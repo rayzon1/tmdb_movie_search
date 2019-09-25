@@ -3,7 +3,7 @@ import * as SearchActionTypes from '../actiontypes/SearchActionTypes';
 export const isLoading = bool => {
     return {
         type: SearchActionTypes.LOADING_DATA,
-        isLoading: bool
+        bool
     }
 }
 

@@ -14,9 +14,9 @@ import {
 import {
   categories,
   setAsyncThen,
-  manageResults
 } from "../exports/ThunkActionsLogic";
 import { getVideoKeys } from "./VideoTrailerActions";
+import { getMediaNews } from "./MediaNewsActions";
 
 /**
  * THUNK ACTION                                                                                                                                                    N TO RETREIVE ALL IMDB ID MOVIE DETAILS.
@@ -48,14 +48,11 @@ export const fetchMovieDetails = urlArray => {
   };
 };
 
-const categoryHold = {
-  
-};
+const categoryHold = {};
 
 //TODO: Create multiple axios calls. One for each category is needed.
 export const fetchVideoKeys = (topRated, popular, upcoming, nowPlaying) => {
   return dispatch => {
-    dispatch(isLoading(true));
     axios
       .all(topRated)
       .then(
@@ -89,7 +86,10 @@ export const fetchVideoKeys = (topRated, popular, upcoming, nowPlaying) => {
           ))
       )
       .then(setTimeout(() => console.log(categoryHold.topRated), 1))
-      .then(setTimeout(() => dispatch(getVideoKeys(categoryHold)), 5));
+      .then(setTimeout(() => {
+        dispatch(getVideoKeys(categoryHold))
+        dispatch(isLoading(false));
+      }, 500))
   };
 };
 
@@ -122,7 +122,6 @@ export const fetchData = url => {
               now.data.results
             )
           );
-          dispatch(isLoading(false));
         })
       )
       .catch(err => {
@@ -131,3 +130,18 @@ export const fetchData = url => {
       });
   };
 };
+
+export const fetchMovieNews = url => {
+
+  return dispatch => {
+    axios
+      .get(url)
+      .then(data => {
+        dispatch(getMediaNews(data))
+      })
+      .catch(err => {
+        dispatch(searchError(true));
+        console.error(err);
+      });
+  }
+}
